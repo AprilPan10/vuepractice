@@ -7,13 +7,15 @@
 		<style>
 			.box{width:200px; height:200px; background:green; border:2px solid black; text-align:center; line-height:200px; color:white;}
 			.hidden{display:none;}
+			.red{width: 100px; height:100px; background-color: red;}
 		</style>
 	</head>
 	<body>
 	
 	<div id="app">
 		<div v-bind:class="{box:true, hidden:boxHidden}">{{message}}</div>
-		<button v-on:click="showhide();">Click</button>
+		<button v-on:click="showhide();">{{btnText}} </button>
+		<div v-bind:class="red"  v-on:click="taller(redHeight)"></div>
 	</div>
 	
 	<script>
@@ -23,16 +25,25 @@
 		data:{
 			boxHeight:200,
 			boxHidden : false,
-			message  : 'Make me disappear!'
+			message  : 'Make me disappear!',
+			btnText:"Hide",
+			red:'red',
+			redHeight:100
 		},
 		methods:{
 			showhide : function(){
 				console.log(this.boxHidden);
 				if(this.boxHidden){
 					this.boxHidden=false;
+					this.btnText = "Hide";
 				}else{
-					this.boxHidden=true;	
+					this.boxHidden=true;
+					this.btnText = "Show";
 				}
+			},
+			taller : function(redHeight){
+				this.redHeight += 10;
+				console.log(redHeight);
 			}
 		}
 		

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<title>J1 Practice</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			.formfield{margin-bottom:10px;}
+
+
+		</style>
+	</head>
+	<body>
+	<p>Winning Score <a href="https://cemc.uwaterloo.ca/contests/computing/2019/stage%201/juniorEF.pdf">from the J1 problem hosted by the CCC 2019.</a></p>
+	<div id="app" class="all">
+		<div class="A">
+            <div id="result">
+                <div><label>Show Score Team A: {{score_total}}</label>
+            </div>
+            <div class="formfield">
+                <label>3 points: <label> <input v-model="points3_qyt">
+            </div>
+            <div class="formfield">
+                <label>2 points: <label> <input v-model="points2_qyt">
+            </div>
+            <div class="formfield">
+                <label>1 points: <label> <input v-model="points1_qyt">
+            </div>
+        </div>
+        <div class="B">
+            <div id="result">
+                <div><label>Show Score Team B: {{score_total_B}}</label>
+            </div>
+            <div class="formfield">
+                <label>3 points: <label> <input v-model="points3_qyt_B">
+            </div>
+            <div class="formfield">
+                <label>2 points: <label> <input v-model="points2_qyt_B">
+            </div>
+            <div class="formfield">
+                <label>1 points: <label> <input v-model="points1_qyt_B">
+            </div>
+        </div>
+        <div v-if="is_A">Winning Team is: A</div>
+        <div v-if="is_B">Winning Team is: B</div>
+        <div v-if="is_C">Winning Team is: A & B</div>
+	</div>
+	
+	<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+			finalA:false,
+			team_name:"TeamA",
+			points3:3,
+			points2:2,
+			points1:1,
+            points3_qyt:0,
+            points2_qyt:0,
+            points1_qyt:0,
+            points3_qyt_B:0,
+            points2_qyt_B:0,
+            points1_qyt_B:0
+			
+		},
+		computed:{
+			score_total:function(){
+				return (this.points3_qyt * this.points3) + 
+				(this.points2_qyt * this.points2) + 
+				(this.points1_qyt * this.points1);	
+			},
+            score_total_B:function(){
+				return (this.points3_qyt_B * this.points3) + 
+				(this.points2_qyt_B * this.points2) + 
+				(this.points1_qyt_B * this.points1);	
+			},
+			is_A:function(){
+				return this.score_total>this.score_total_B;
+            },
+            is_B:function(){
+				return this.score_total<this.score_total_B;
+            },
+            is_C:function(){
+				return this.score_total == this.score_total_B;
+            },
+		}
+	});
+	
+	</script>
+	</body>
+</html>
