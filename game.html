@@ -1,0 +1,69 @@
+ <!-- I will build a board game that have three circle, you can only click one circle a time, When you flip one you can get a score. It will caculte how much score you win VS your friends. -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<title>Board Game</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+            .all{display: block;margin: 0 auto;text-align: center;}
+            .red{width: 100px;height: 100px;background-color: red;display:inline-block;}
+            .blue{width: 100px;height: 100px;background-color: blue;display: inline-block;}
+            .yellow{width: 100px;height: 100px;background-color: yellow;display: inline-block;}
+            .button{margin: 20px;}
+		</style>
+	</head>
+	<body>
+	<div id="app" class="all">
+        <div class="red" v-on:click="showred();">{{red}}</div>
+        <div class="yellow" v-on:click="showyellow();">{{yellow}}</div>
+        <div class="blue" v-on:click="showblue();">{{blue}}</div>
+        <div class="button">
+            <button  v-on:click="refresh();">refresh</button>
+            <button  v-on:click="compare();">winner</button>
+        </div>
+	</div>
+	
+	<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+            red:0,
+            yellow:0,
+            blue:0,
+            bluewin:"blue"
+		},
+        methods:{
+			showred : function(){
+                this.red= Math.ceil(Math.random()*100);
+                
+			},
+            showyellow : function(){
+			    this.yellow= Math.ceil(Math.random()*100);
+				
+			},
+            showblue : function(){
+				this.blue= Math.ceil(Math.random()*100);
+				
+			},
+
+			refresh : function(){
+                location.reload();
+            },
+            compare : function(){
+               if (Math.max(this.blue, this.yellow, this.red)==this.blue){
+                alert("winner is blue");
+               }else if((Math.max(this.blue, this.yellow, this.red)==this.red)){
+                alert("winner is red");
+               }else if((Math.max(this.blue, this.yellow, this.red)==this.yellow)){
+                alert("winner is yellow");
+               }
+               
+            }
+		}
+        
+	});
+	
+	</script>
+	</body>
+</html>
