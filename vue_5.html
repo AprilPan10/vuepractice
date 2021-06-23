@@ -15,7 +15,7 @@
 	<div id="app">
 		<div v-bind:class="{box:true, hidden:boxHidden}">{{message}}</div>
 		<button v-on:click="showhide();">{{btnText}} </button>
-		<div v-bind:class="red"  v-on:click="taller(redHeight)"></div>
+		<div v-bind:class="red" v-bind:style="{'height':redHeight+'px'}" v-on:click="taller(redHeight)"></div>
 	</div>
 	
 	<script>
